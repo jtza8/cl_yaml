@@ -1,3 +1,3 @@
-(defpackage :yaml
-  (:use :common-lisp :xlunit)
-  (:export :node))
+(defpackage yaml
+  (:use common-lisp xlunit)
+  (:export node))
