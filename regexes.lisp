@@ -4,7 +4,10 @@
   (ppcre:create-scanner "(.*?(?=\\s*#)|.*)(?:\\s*#\\s*)?(.*)"))
 
 (defparameter *list-item-regex*
-  (ppcre:create-scanner "^(\\s*)-(\\s*)(.+?)\\s*$"))
+  (ppcre:create-scanner "^(\\s*)-(\\s*)(.*?)\\s*$"))
 
 (defparameter *key-value-regex*
-  (ppcre:create-scanner "^(\\s*)(.+?)\\s*:\\s*(.+?)\\s*$"))
+  (ppcre:create-scanner "^(\\s*)(.+?)\\s*:\\s*(.*?)\\s*$"))
+
+(defparameter *eol-regex*
+  (ppcre:create-scanner "\\n"))

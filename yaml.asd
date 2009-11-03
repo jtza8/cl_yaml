@@ -5,5 +5,5 @@
   :licence "BSD License"
   :depends-on ("xlunit" "cl-ppcre")
   :components ((:file "packages")
-               (:file "node" :depends-on ("packages"))
-               (:file "regexes" :depends-on ("packages"))))
+               (:file "regexes" :depends-on ("packages"))
+               (:file "line" :depends-on ("packages" "regexes"))))
