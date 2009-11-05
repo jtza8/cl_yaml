@@ -6,4 +6,5 @@
   :depends-on ("xlunit" "cl-ppcre")
   :components ((:file "packages")
                (:file "regexes" :depends-on ("packages"))
-               (:file "line" :depends-on ("packages" "regexes"))))
+               (:file "line" :depends-on ("packages"))
+               (:file "parser" :depends-on ("packages" "line" "regexes"))))
