@@ -19,10 +19,9 @@
               (setf indent-template white-space
                     indent-level 1))
             (setf indent-level
-                  (do ((line-indent indent-template
-                                    (concatenate 'string
-                                                 line-indent
-                                                 indent-template))
+                  (do ((line-indent
+                        indent-template
+                        (concatenate 'string line-indent indent-template))
                        (indent-level 0 (1+ indent-level)))
                       ((> (length line-indent) (length white-space)) indent-level))))
         (make-instance 'line

@@ -3,7 +3,7 @@
   :version "0.1"
   :author "Jens Thiede"
   :licence "BSD License"
-  :depends-on ("xlunit" "cl-ppcre")
+  :depends-on ("cl-ppcre" "xlunit")
   :components ((:file "packages")
                (:file "regexes" :depends-on ("packages"))
                (:file "line" :depends-on ("packages"))

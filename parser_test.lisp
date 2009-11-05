@@ -30,7 +30,8 @@
 
 (defun assert-lines-equal (expected actual)
   (when (or (eql expected nil) (eql actual nil))
-    (assert-equal expected actual))
+    (assert-equal expected actual)
+    (return-from assert-lines-equal))
   (assert-equal (indent-level expected) (indent-level actual))
   (assert-equal (content expected) (content actual))
   (assert-equal (comment expected) (comment actual)))
