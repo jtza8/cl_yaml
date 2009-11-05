@@ -4,9 +4,9 @@
   ((content :initarg :content
             :initform ""
             :reader content)
-   (indentation :initarg :indentation
-                :initform 0
-                :reader indentation)
+   (indent-level :initarg :indent-level
+                 :initform 0
+                 :reader indent-level)
    (comment :initarg :comment
             :initform ""
             :reader comment)))
