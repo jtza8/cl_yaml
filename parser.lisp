@@ -32,7 +32,6 @@
 (defmethod advance ((parser parser))
   (with-slots (indent-template past-line present-line future-line) parser
     (let ((next-line (fetch-line parser)))
-      (when (eql next-line nil) (return-from advance parser))
       (setf past-line present-line
             present-line future-line
             future-line (pre-parse parser next-line))
@@ -44,6 +43,23 @@
 (defgeneric fetch-line (parser)
   (:documentation "This method should produce a line of text for processing"))
 
+(defun scan-to-item (target-string)
+  (ppcre:register-groups-bind (item) (*list-item-regex* target-string)
+    item))
+
 (defmethod parse-list ((parser parser))
   (with-slots (past-line present-line future-line) parser
-      (advance parser)))
+    (let ((items '()))
+      (do ((item (scan-to-item (content present-line))
+                 (scan-to-item (content present-line)))
+           (x 0 (1+ x)))
+          ((or (eql item nil)
+               (eql future-line nil)
+               (= x 10)))
+;        (when (and (not (eql past-line nil))
+;                   (< (indent-level past-line) (indent-level present-line)))
+;          (let ((child-items (parse-list parser)))
+;            (push child-items items)))
+        (push item items)
+        (advance parser))
+      (nreverse items))))

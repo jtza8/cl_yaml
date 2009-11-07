@@ -52,7 +52,7 @@
 
 (def-test-method test-advance ((test parser-test))
   (with-slots (parser) test
-    (assert-equal nil (past-line parser))
+    (assert-lines-equal nil (past-line parser))
     (assert-lines-equal *line-one* (present-line parser))
     (assert-lines-equal *line-two* (future-line parser))
     (advance parser)
@@ -67,5 +67,11 @@
     (assert-lines-equal *line-three* (past-line parser))
     (assert-lines-equal *line-four* (present-line parser))
     (assert-lines-equal *line-five* (future-line parser))))
+
+
+(def-test-method test-parse-list ((test parser-test))
+  (with-slots (parser) test
+    (assert-equal '("one" "two" ("three" ("four")) "five")
+                  (parse-list parser))))
 
 (textui-test-run (get-suite parser-test))
