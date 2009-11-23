@@ -11,7 +11,8 @@
   (advance parser))
 
 (defmethod pre-parse ((parser parser) line)
-  (ppcre:register-groups-bind (white-space text comment) (*pre-parse-regex* line)
+  (ppcre:register-groups-bind (white-space text comment)
+                              (*pre-parse-regex* line)
     (with-slots (indent-template) parser
       (let ((indent-level 0))
         (if (eq indent-template nil)
@@ -23,7 +24,8 @@
                         indent-template
                         (concatenate 'string line-indent indent-template))
                        (indent-level 0 (1+ indent-level)))
-                      ((> (length line-indent) (length white-space)) indent-level))))
+                      ((> (length line-indent) (length white-space))
+                       indent-level))))
         (make-instance 'line
                        :indent-level indent-level
                        :content text
@@ -42,6 +44,10 @@
 
 (defgeneric fetch-line (parser)
   (:documentation "This method should produce a line of text for processing"))
+
+(defmethod parse-scalar ((parser parser))
+  (with-slots (past-line present-line future-line) parser
+    ()))
 
 (defun scan-to-item (target-string)
   (ppcre:register-groups-bind (item) (*list-item-regex* target-string)
